@@ -266,7 +266,7 @@ static ngx_int_t ngx_let_apply_binary_integer_op(ngx_http_request_t *r, int op,
 		ngx_array_t* args, ngx_str_t* value)
 {
 	ngx_str_t* str;
-	int left, right;
+	int left, right = NGX_ERROR;
 	unsigned sz;
 
 	if (args->nelts != 2) {
