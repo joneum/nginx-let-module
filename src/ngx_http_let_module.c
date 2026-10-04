@@ -46,7 +46,7 @@ static char* ngx_http_let_let(ngx_conf_t *cf, ngx_command_t *cmd, void *conf);
 static ngx_command_t ngx_http_let_commands[] = {
 
 	{	ngx_string("let"),
-		NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_1MORE,
+		NGX_HTTP_MAIN_CONF|NGX_HTTP_SRV_CONF|NGX_HTTP_LOC_CONF|NGX_CONF_1MORE,
 		ngx_http_let_let,
 		NGX_HTTP_LOC_CONF_OFFSET,
 		0,
@@ -518,7 +518,7 @@ static char* ngx_http_let_let(ngx_conf_t *cf, ngx_command_t *cmd, void *conf)
 	
 	ngx_log_debug0(NGX_LOG_INFO, cf->log, 0, "let command handler");
 
-        if (value[1].len <= 1)
+	if (value[1].len <= 1)
 		return "needs variable name";
 
 	if (value[1].data[0] != '$')
