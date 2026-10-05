@@ -25,8 +25,7 @@ Table of Contents
 * [The Grammar](#the-grammar)
 * [Source Repository](#source-repository)
 * [Bugs and Patches](#bugs-and-patches)
-* [Authors](#authors)
-* [Copyright & License](#copyright--license)
+* [License](#license)
 
 Description
 ===========
@@ -204,15 +203,6 @@ Source Repository
 
 https://github.com/joneum/nginx-let-module
 
-This is a maintained fork of
-[arut/nginx-let-module](https://github.com/arut/nginx-let-module), which
-has taken no change since 2012.  It carries the ability to build as a
-loadable module, which came from the fork `baysao/nginx-let-module`
-that has since been deleted from GitHub, and the crash fix from the
-upstream pull request
-[#1](https://github.com/arut/nginx-let-module/pull/1), open there since
-2014.
-
 Bugs and Patches
 ================
 
@@ -220,25 +210,9 @@ Please report them through the [issue
 tracker](https://github.com/joneum/nginx-let-module/issues) or send a
 pull request.
 
-What is open at the repository this one was forked from, and where
-this fork stands on each of it, is in [UPSTREAM.md](UPSTREAM.md).
-
-Authors
+License
 =======
 
-Roman Arutyunyan &lt;arut@qip.ru&gt; wrote the module.
-
-This repository is maintained by Jochen Neumeister &lt;joneum@FreeBSD.org&gt;,
-who also maintains the nginx ports in FreeBSD.
-
-Copyright & License
-===================
-
-Copyright (c) 2011, Roman Arutyunyan &lt;arut@qip.ru&gt;.
-
-Copyright (c) 2026, Jochen Neumeister &lt;joneum@FreeBSD.org&gt;.
-
-This module is licensed under the terms of the BSD 2-Clause License,
-which the author stated in the header of src/ngx_http_let_module.c.
-The original repository ships no separate license file, so that text
-is reproduced, with both lines, in [LICENSE](LICENSE).
+BSD 2-Clause.  The upstream repository ships no licence file; the
+text stands in the header of `src/ngx_http_let_module.c` and is
+reproduced in [LICENSE](LICENSE).
