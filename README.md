@@ -228,15 +228,17 @@ Authors
 
 Roman Arutyunyan &lt;arut@qip.ru&gt; wrote the module.
 
-This fork is maintained by Jochen Neumeister &lt;joneum@FreeBSD.org&gt;,
+This repository is maintained by Jochen Neumeister &lt;joneum@FreeBSD.org&gt;,
 who also maintains the nginx ports in FreeBSD.
 
 Copyright & License
 ===================
 
-Copyright (c) 2011 Roman Arutyunyan &lt;arut@qip.ru&gt;.
+Copyright (c) 2011, Roman Arutyunyan &lt;arut@qip.ru&gt;.
+
+Copyright (c) 2026, Jochen Neumeister &lt;joneum@FreeBSD.org&gt;.
 
 This module is licensed under the terms of the BSD 2-Clause License,
 which the author stated in the header of src/ngx_http_let_module.c.
 The original repository ships no separate license file, so that text
-is reproduced here in LICENSE.
+is reproduced, with both lines, in [LICENSE](LICENSE).
