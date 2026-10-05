@@ -220,6 +220,9 @@ Please report them through the [issue
 tracker](https://github.com/joneum/nginx-let-module/issues) or send a
 pull request.
 
+What is open at the repository this one was forked from, and where
+this fork stands on each of it, is in [UPSTREAM.md](UPSTREAM.md).
+
 Authors
 =======
 
