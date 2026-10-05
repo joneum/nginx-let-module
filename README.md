@@ -204,6 +204,7 @@ Copyright & License
 
 Copyright (c) 2011 Roman Arutyunyan &lt;arut@qip.ru&gt;.
 
-The original repository carries no licence text, only the copyright
-line above, and no licence has been granted in writing since.  Until
-that is settled, treat the code as all rights reserved by its author.
+This module is licensed under the terms of the BSD 2-Clause License,
+which the author stated in the header of src/ngx_http_let_module.c.
+The original repository ships no separate license file, so that text
+is reproduced here in LICENSE.
