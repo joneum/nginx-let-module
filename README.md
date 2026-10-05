@@ -19,6 +19,7 @@ Table of Contents
     * [let](#let)
 * [Expressions](#expressions)
     * [Spaces around every token](#spaces-around-every-token)
+    * [One name, one expression](#one-name-one-expression)
 * [Compatibility](#compatibility)
 * [Test Suite](#test-suite)
 * [The Grammar](#the-grammar)
@@ -108,9 +109,15 @@ let
 **Default:** *-*
 **Context:** *http, server, location*
 
-Evaluates *expression* and assigns the result to *$variable*.  The
-assignment happens in the rewrite phase, so the variable is set before a
-content handler runs.
+Defines *$variable* and attaches *expression* to it.  Nothing is
+computed while the configuration is read and nothing runs in the
+rewrite phase: the expression is evaluated the first time something
+reads the variable during a request, and the result is kept for the
+rest of that request.
+
+The definition is server-wide, not per location.  See [One name, one
+expression](#one-name-one-expression) before using the same variable
+name twice.
 
 Expressions
 ===========
@@ -140,6 +147,28 @@ let $v ( 1 + 2 ) ;         # works
 let $v 1 + (2 * $uid);     # does not work
 let $v 1 + ( 2 * $uid ) ;  # works
 ```
+
+One name, one expression
+------------------------
+
+`let` registers an nginx variable, and nginx variables belong to the
+server as a whole.  Writing `let` for the same name in two places does
+not give each place its own value; the expression parsed last wins
+everywhere, including where no `let` was written at all:
+
+```nginx
+location /a { let $v 1 + 1 ; echo $v; }    # answers 200
+location /b { let $v 100 + 100 ; echo $v; } # answers 200
+location /c { echo $v; }                   # answers 200
+```
+
+Give each expression its own variable name.
+
+This is also why nginx refuses `let` inside an `if` block with *"let"
+directive is not allowed here*.  The directive defines a variable
+rather than performing an assignment, so there is nothing for the
+condition to make conditional.  To compute a value only in some cases,
+put the condition into the expression or pick the variable with `map`.
 
 Compatibility
 =============
