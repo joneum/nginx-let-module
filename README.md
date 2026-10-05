@@ -82,7 +82,7 @@ trying a patch out.  It adds `echo-nginx-module`, which the test suite
 uses to print a variable:
 
 ```
-ci/build.sh 1.31.5 /tmp/nginx-test
+ci/build.sh 1.31.6 /tmp/nginx-test
 /tmp/nginx-test/sbin/nginx -V
 ```
 
@@ -144,9 +144,9 @@ let $v 1 + ( 2 * $uid ) ;  # works
 Compatibility
 =============
 
-The test suite runs against nginx 1.22.0, 1.24.0, 1.26.3, 1.28.0 and
-1.31.5, on Linux and on FreeBSD, and the module builds on everything in
-between.
+The test suite runs against nginx 1.22.0, 1.24.0, 1.26.3, 1.28.0, 1.30.5
+and 1.31.6, on Linux and on FreeBSD, and the module builds on everything
+in between.
 
 Test Suite
 ==========
@@ -155,7 +155,7 @@ The suite is written against
 [Test::Nginx](https://metacpan.org/pod/Test::Nginx):
 
 ```
-ci/build.sh 1.31.5 /tmp/nginx-test
+ci/build.sh 1.31.6 /tmp/nginx-test
 TEST_NGINX_BINARY=/tmp/nginx-test/sbin/nginx prove -r t/
 ```
 
