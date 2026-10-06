@@ -24,25 +24,6 @@ nginx configuration and put the result into a variable.
 [lint-badge]: https://github.com/joneum/nginx-let-module/actions/workflows/lint.yml/badge.svg
 [lint-link]: https://github.com/joneum/nginx-let-module/actions/workflows/lint.yml
 
-Table of Contents
-=================
-
-* [Name](#name)
-* [Description](#description)
-* [Status](#status)
-* [Synopsis](#synopsis)
-* [Installation](#installation)
-    * [Building as a dynamic module](#building-as-a-dynamic-module)
-* [Directives](#directives)
-    * [let](#let)
-* [Expressions](#expressions)
-    * [Spaces around every token](#spaces-around-every-token)
-    * [One name, one expression](#one-name-one-expression)
-* [Compatibility](#compatibility)
-* [Test Suite](#test-suite)
-* [The Grammar](#the-grammar)
-* [License](#license)
-
 Description
 ===========
 
