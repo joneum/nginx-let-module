@@ -41,8 +41,6 @@ Table of Contents
 * [Compatibility](#compatibility)
 * [Test Suite](#test-suite)
 * [The Grammar](#the-grammar)
-* [Source Repository](#source-repository)
-* [Bugs and Patches](#bugs-and-patches)
 * [License](#license)
 
 Description
@@ -65,9 +63,8 @@ Status
 
 In production use, and packaged in the FreeBSD ports tree as the `LET`
 option of the nginx ports.  The module builds against every nginx
-release listed under [Compatibility](#compatibility) and the test suite
-runs on each of them, on Linux and on FreeBSD, in [continuous
-integration](https://github.com/joneum/nginx-let-module/actions).
+release listed under [Compatibility](#compatibility), and the suite runs
+on each of them, on Linux and on FreeBSD.
 
 Synopsis
 ========
@@ -215,18 +212,6 @@ that building the module needs no bison.  After a change to the grammar:
 ```
 cd src && bison -d let.y
 ```
-
-Source Repository
-=================
-
-https://github.com/joneum/nginx-let-module
-
-Bugs and Patches
-================
-
-Please report them through the [issue
-tracker](https://github.com/joneum/nginx-let-module/issues) or send a
-pull request.
 
 License
 =======
