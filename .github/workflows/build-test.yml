@@ -1,0 +1,79 @@
+name: Build & Test
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  schedule:
+    # Monday morning, so a new nginx release that breaks the module shows
+    # up here and not in somebody's build
+    - cron: '41 5 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  suite:
+    name: nginx ${{ matrix.nginx }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # 1.22.0 is the oldest release the README promises, 1.30.5 the
+        # current stable and 1.31.6 the current mainline
+        nginx: ['1.22.0', '1.24.0', '1.26.3', '1.28.0', '1.30.5', '1.31.6']
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: ./.github/actions/setup
+
+      - name: Build nginx ${{ matrix.nginx }}
+        run: ci/build.sh '${{ matrix.nginx }}' "$HOME/nginx"
+
+      - name: Run the test suite
+        run: TEST_NGINX_BINARY="$HOME/nginx/sbin/nginx" prove -r t/
+
+  dynamic:
+    name: loadable module
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: ./.github/actions/setup
+
+      - name: Build every module as a loadable object
+        run: ci/build.sh 1.31.6 "$HOME/nginx" dynamic
+
+      - name: Run the test suite against the loaded modules
+        run: |
+          mods=
+          for so in "$HOME"/nginx/modules/*.so; do
+            mods="$mods $so"
+          done
+          echo "loading:$mods"
+          TEST_NGINX_LOAD_MODULES="$mods" \
+            TEST_NGINX_BINARY="$HOME/nginx/sbin/nginx" prove -r t/
+
+  grammar:
+    name: let.y still compiles
+    runs-on: ubuntu-latest
+    # src/let.tab.c is committed so that building needs no bison.  That
+    # only holds as long as the grammar it came from still parses.
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install bison
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends bison
+
+      - name: Run bison over the grammar
+        run: |
+          cd src
+          bison -d -Wall let.y -o /tmp/let.tab.c
+          echo "the grammar parses"

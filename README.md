@@ -4,7 +4,25 @@ Name
 nginx-let-module - evaluate an arithmetic or string expression in the
 nginx configuration and put the result into a variable.
 
-[![CI](https://github.com/joneum/nginx-let-module/actions/workflows/ci.yml/badge.svg)](https://github.com/joneum/nginx-let-module/actions/workflows/ci.yml)
+[![Build & Test][build-test-badge]][build-test-link]
+[![FreeBSD][freebsd-badge]][freebsd-link]
+[![A/UBSan][sanitizers-badge]][sanitizers-link]
+[![Valgrind][valgrind-badge]][valgrind-link]
+[![CodeQL][codeql-badge]][codeql-link]
+[![Lint][lint-badge]][lint-link]
+
+[build-test-badge]: https://github.com/joneum/nginx-let-module/actions/workflows/build-test.yml/badge.svg
+[build-test-link]: https://github.com/joneum/nginx-let-module/actions/workflows/build-test.yml
+[freebsd-badge]: https://github.com/joneum/nginx-let-module/actions/workflows/freebsd.yml/badge.svg
+[freebsd-link]: https://github.com/joneum/nginx-let-module/actions/workflows/freebsd.yml
+[sanitizers-badge]: https://github.com/joneum/nginx-let-module/actions/workflows/sanitizers.yml/badge.svg
+[sanitizers-link]: https://github.com/joneum/nginx-let-module/actions/workflows/sanitizers.yml
+[valgrind-badge]: https://github.com/joneum/nginx-let-module/actions/workflows/valgrind.yml/badge.svg
+[valgrind-link]: https://github.com/joneum/nginx-let-module/actions/workflows/valgrind.yml
+[codeql-badge]: https://github.com/joneum/nginx-let-module/actions/workflows/codeql.yml/badge.svg
+[codeql-link]: https://github.com/joneum/nginx-let-module/actions/workflows/codeql.yml
+[lint-badge]: https://github.com/joneum/nginx-let-module/actions/workflows/lint.yml/badge.svg
+[lint-link]: https://github.com/joneum/nginx-let-module/actions/workflows/lint.yml
 
 Table of Contents
 =================
