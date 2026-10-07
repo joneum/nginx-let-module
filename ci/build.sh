@@ -56,7 +56,7 @@ if [ "$got" != "$ECHO_COMMIT" ]; then
 	echo "ci/build.sh: echo-nginx-module $ECHO_TAG is not at its pinned commit" >&2
 	echo "  expected $ECHO_COMMIT" >&2
 	echo "  got      $got" >&2
-	rm -rf "$DEPS/echo-nginx-module"
+	rm -rf "${DEPS:?}/echo-nginx-module"
 	exit 1
 fi
 

@@ -17,6 +17,19 @@ Newest first.  Dates are release dates.
   clone is refused if the tag no longer points at that commit.  A tag is a
   movable label, so pinning one alone does not say what was built.
 
+### Fixed
+
+- `ci/ubsan.suppress` names the one finding nginx's own startup produces on
+  1.30.5: `ngx_pstrdup` copies a zero-length string from a null pointer while
+  `ngx_init_cycle` sets up the prefixes, before a single module is loaded.
+  The entry carries the full stack and the reason, and it comes out again as
+  soon as the shipped stable line no longer carries it.  1.31.6 does not.
+
+- A cleanup in `ci/build.sh` spelled `rm -rf "$DEPS/$name"`.  Both parts are
+  always set, but an empty one would have taken the whole dependency
+  directory with it, and two empty ones the root.  Written `${DEPS:?}` now,
+  so the shell refuses instead.
+
 ### Changed
 
 - The deep checks -- codeql, lint, sanitizers, valgrind and the FreeBSD run
