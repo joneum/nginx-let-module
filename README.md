@@ -8,6 +8,7 @@ nginx configuration and put the result into a variable.
 [![FreeBSD][freebsd-badge]][freebsd-link]
 [![A/UBSan][sanitizers-badge]][sanitizers-link]
 [![Valgrind][valgrind-badge]][valgrind-link]
+[![Reload][reload-badge]][reload-link]
 [![CodeQL][codeql-badge]][codeql-link]
 [![Lint][lint-badge]][lint-link]
 
@@ -19,6 +20,8 @@ nginx configuration and put the result into a variable.
 [sanitizers-link]: https://github.com/joneum/nginx-let-module/actions/workflows/sanitizers.yml
 [valgrind-badge]: https://github.com/joneum/nginx-let-module/actions/workflows/valgrind.yml/badge.svg
 [valgrind-link]: https://github.com/joneum/nginx-let-module/actions/workflows/valgrind.yml
+[reload-badge]: https://github.com/joneum/nginx-let-module/actions/workflows/reload.yml/badge.svg
+[reload-link]: https://github.com/joneum/nginx-let-module/actions/workflows/reload.yml
 [codeql-badge]: https://github.com/joneum/nginx-let-module/actions/workflows/codeql.yml/badge.svg
 [codeql-link]: https://github.com/joneum/nginx-let-module/actions/workflows/codeql.yml
 [lint-badge]: https://github.com/joneum/nginx-let-module/actions/workflows/lint.yml/badge.svg
