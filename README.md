@@ -168,9 +168,9 @@ put the condition into the expression or pick the variable with `map`.
 Compatibility
 =============
 
-The test suite runs against nginx 1.22.0, 1.24.0, 1.26.3, 1.28.0, 1.30.5
-and 1.31.6, on Linux and on FreeBSD, and the module builds on everything
-in between.
+The test suite runs against nginx 1.28.3, 1.30.5 and 1.31.6, on Linux and
+on FreeBSD.  Those are the last release of the previous stable line, the
+current stable and the current mainline; nginx keeps nothing older alive.
 
 Test Suite
 ==========
