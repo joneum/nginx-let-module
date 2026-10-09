@@ -9,8 +9,29 @@ Newest first.  Dates are release dates.
 - The repository moved from `joneum` to the `sysadmin-labs` organization.
   Badges and links in the README point to the new address; the old URLs
   redirect.
+- Two log messages dropped from `alert` to `error`: `let error parsing
+  argument` and `let variable %d not found`.  Both are reachable with
+  nothing but a request -- `?a=abc` is enough -- and `alert` means the
+  operator has to act now.  It also made Test::Nginx print a warning for
+  every such request, and it would trip the error log oracles in
+  `ci/reload.sh` and in the hostile checks of the sibling modules.  The
+  four remaining `alert`s stay: they report a configuration or a grammar
+  that is wrong, not something a client did.
 
 ### Added
+
+- `t/zero.t`: six cases around operands a client controls -- a zero divisor
+  for `/` and for `%`, a zero divisor written out in the configuration, a
+  divisor that is not zero and still divides, an operand that is not a
+  number, and the arguments missing altogether.  Every block also asserts
+  that no `alert` was logged, which is the oracle for "the worker did not
+  die".
+- One `let` per block on purpose.  The module registers a **global**
+  variable and the expression parsed last wins everywhere, which
+  `t/scope.t` nails down.  Two expressions in one configuration measure the
+  wrong one, and that is not theory: the first run of this proof put three
+  locations in one file and reported `84 / 2` as 86, because the addition
+  from the last location had won everywhere.
 
 - A reload test: `ci/reload.sh`, the per-module `ci/reload.conf` beside it,
   and a workflow of its own.  nginx is reloaded eight times in a row and
@@ -48,6 +69,20 @@ Newest first.  Dates are release dates.
   movable label, so pinning one alone does not say what was built.
 
 ### Fixed
+
+- **A client could kill the worker with `?b=0`.**  `/` and `%` in
+  `ngx_let_apply_binary_integer_op` divided without looking at the divisor.
+  Integer division by zero is undefined, and on x86 it raises SIGFPE, so
+  every configuration with a variable on the right of either operator was
+  open to that from anywhere.  Measured on nginx 1.30.5 with
+  `let $v $arg_a / $arg_b` and a request of `?a=1&b=0`:
+
+        before   HTTP 000   [alert] worker process 24676 exited on signal 8 (core dumped)
+        after    HTTP 200   no signal deaths
+
+  A zero divisor now returns `NGX_ERROR` out of the expression, which is
+  what an unparseable operand has always done: the variable stays empty and
+  the request is answered.
 
 - `ci/ubsan.suppress` names the one finding nginx's own startup produces on
   1.30.5: `ngx_pstrdup` copies a zero-length string from a null pointer while

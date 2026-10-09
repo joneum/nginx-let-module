@@ -284,7 +284,7 @@ static ngx_int_t ngx_let_apply_binary_integer_op(ngx_http_request_t *r, int op,
 	}
 	
 	if (left == NGX_ERROR || right == NGX_ERROR) {
-		ngx_log_error(NGX_LOG_ALERT, r->connection->log, 0, 
+		ngx_log_error(NGX_LOG_ERR, r->connection->log, 0, 
 				"let error parsing argument '%*s'", str->len, str->data);
 		return NGX_ERROR;
 	}
@@ -304,10 +304,20 @@ static ngx_int_t ngx_let_apply_binary_integer_op(ngx_http_request_t *r, int op,
 			break;
 
 		case '/':
+			if (right == 0) {
+				ngx_log_error(NGX_LOG_ERR, r->connection->log, 0,
+						"let division by zero");
+				return NGX_ERROR;
+			}
 			left /= right;
 			break;
 
 		case '%':
+			if (right == 0) {
+				ngx_log_error(NGX_LOG_ERR, r->connection->log, 0,
+						"let remainder by zero");
+				return NGX_ERROR;
+			}
 			left %= right;
 			break;
 
@@ -365,7 +375,7 @@ static ngx_int_t ngx_let_get_node_value(ngx_http_request_t* r, ngx_let_node_t* n
 			vv = ngx_http_get_indexed_variable(r, node->index);
 				
 			if (vv == NULL || vv->not_found) {
-				ngx_log_error(NGX_LOG_ALERT, r->connection->log, 0, 
+				ngx_log_error(NGX_LOG_ERR, r->connection->log, 0, 
 						"let variable %d not found", node->index);
 					
 				return NGX_ERROR;
