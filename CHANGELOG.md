@@ -6,6 +6,29 @@ Newest first.  Dates are release dates.
 
 ### Changed
 
+- The bounded apt call moved out of `.github/actions/setup` and into
+  `ci/apt-get.sh`, and the lint workflow now uses it instead of carrying a
+  second, unbounded copy.  Two things follow.  There is one implementation
+  of the bound and the retries rather than two that can drift apart, and
+  shellcheck actually sees it: the `shell` job checks every script under
+  `ci/`, while a `run:` block inside a workflow is invisible to it.
+- The lint workflow no longer installs shellcheck unconditionally.  The
+  runner image ships it, so the step only acts if that ever stops being
+  true -- and then through the same wrapper, because a stalled mirror must
+  not hold this job either.
+- The widened gate earned its keep on the spot: a comment in the new
+  script began with `# shellcheck`, which shellcheck reads as a directive
+  and then cannot parse -- SC1072 and SC1073, both errors.  The sentence is
+  reworded.  That line sat in a `run:` block before the move and nothing
+  would ever have looked at it.
+- `bison` in the grammar job goes through `ci/apt-get.sh` as well.  It was
+  the last bare `sudo apt-get` left in any of these repositories.
+- That job uses `working-directory: src` instead of a bare `cd src`.
+  shellcheck flags such a `cd` (SC2164) because in a script without
+  `set -e` the next command then runs in the wrong place.  Here it would
+  have aborted anyway, since GitHub runs a `run:` block with `bash -e`, so
+  this is tidiness rather than a bug that was waiting -- but the `cd` is
+  gone and with it the finding.
 - The repository moved from `joneum` to the `sysadmin-labs` organization.
   Badges and links in the README point to the new address; the old URLs
   redirect.
